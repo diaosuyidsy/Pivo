@@ -24,23 +24,23 @@ cc.Class({
 
   // onLoad () {},
 
-  start () {
+  start() {
     // Push the first road onto the holder
     this._prefabHolder.push(this.FirstRoad)
     this._currentPointer++
     this.generateNextLevel()
-    // this.generateNextLevel()
+    this.generateNextLevel()
 
-    // this.generateNextLevel()
+    this.generateNextLevel()
 
-    // this.generateNextLevel()
+    this.generateNextLevel()
 
     // Generate the next x level according to maxpointer
     // this.testent = cc.instantiate(this.Road1Prefab)
     // this.testent.parent = this.PrefabParent
   },
 
-  generateNextLevel () {
+  generateNextLevel() {
     // If current pointer is more than max, reset to 0
     if (this._currentPointer > this._maxPointer) {
       this._currentPointer = 0
@@ -65,7 +65,7 @@ cc.Class({
   },
 
   // Connect the roads
-  setCorrectPosition (target) {
+  setCorrectPosition(target) {
     var lastIndex = this._currentPointer == 0
       ? this._maxPointer
       : this._currentPointer - 1

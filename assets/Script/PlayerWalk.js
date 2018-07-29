@@ -12,6 +12,7 @@ var PlayerWalk = cc.Class({
   extends: cc.Component,
 
   properties: {
+    LevelHolder: cc.Node,
     WayPointHolder: cc.Node,
     _wayPoints: [cc.Node],
     _currentWPIndex: 0,
@@ -21,21 +22,32 @@ var PlayerWalk = cc.Class({
 
   // LIFE-CYCLE CALLBACKS:
 
-  onLoad () {
+  onLoad() {
     this.node.on('Rewalk', event => {
       cc.log('HelloWorld Ha')
-      // First Find the parent
-      var nodeParent = this.WayPointHolder.parent
+      // Find the next children and fill WayPointHolder with it
+      // Next get its position in the parent
+      var index = 0
+      for (; index < this.LevelHolder.children.length; index++) {
+        if (this.LevelHolder.children[index] == this.WayPointHolder.parent) {
+          break;
+        }
+      }
+      // If we break, then we have found the target index, which is 
+      this.WayPointHolder = this.LevelHolder.children[index + 1].children[0]
+      this._wayPoints = this.WayPointHolder.children
+      this._currentWPIndex = 0
+      this.walk()
     })
   },
 
-  start () {
+  start() {
     this._wayPoints = this.WayPointHolder.children
     cc.log(this._wayPoints.length)
     this.walk()
   },
 
-  walk () {
+  walk() {
     // To maintain a certain speed, need to calculate the distance to the next node for t = s/v
     var distanceToNext = this.checkDistance(
       this._wayPoints[this._currentWPIndex].parent.convertToWorldSpace(
@@ -54,7 +66,7 @@ var PlayerWalk = cc.Class({
   },
 
   // After walk to the point, callback is executed to walk to the next point
-  walkCallBack () {
+  walkCallBack() {
     if (this._currentWPIndex < this._wayPoints.length - 1) {
       this._currentWPIndex++
       this.walk()
@@ -64,7 +76,7 @@ var PlayerWalk = cc.Class({
   },
 
   // Return the distance in float from this node to targetNode
-  checkDistance (targetNode) {
+  checkDistance(targetNode) {
     var dx = targetNode.x - this.node.x
     var dy = targetNode.y - this.node.y
     var distance = Math.sqrt(dx * dx + dy * dy)
