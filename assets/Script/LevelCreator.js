@@ -43,8 +43,8 @@ cc.Class({
   },
 
   generateNextLevel() {
-    var RandomRoad = this.RoadPrefabs[this.getRandomIntInclusive(0, this.RoadPrefabs.length - 1)]
-    var RandomObstacle = this.ObstaclePrefabs[this.getRandomIntInclusive(0, this.ObstaclePrefabs.length - 1)]
+    var RandomRoad = this._currentPointer % 2 == 0 ? this.RoadPrefabs[this.getRandomIntInclusive(0, this.RoadPrefabs.length - 1)] :
+      this.ObstaclePrefabs[this.getRandomIntInclusive(0, this.ObstaclePrefabs.length - 1)]
     // If current pointer is more than max, reset to 0
     if (this._currentPointer > this._maxPointer) {
       this._currentPointer = 0
