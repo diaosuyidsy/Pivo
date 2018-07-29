@@ -1926,6 +1926,9 @@
       "__id__": 47
     },
     "_enabled": true,
+    "LevelHolder": {
+      "__id__": 7
+    },
     "WayPointHolder": {
       "__id__": 9
     },
@@ -2025,6 +2028,16 @@
     "Road1Prefab": {
       "__uuid__": "4f18a748-bba6-44f2-9255-9c6367b4220c"
     },
+    "RoadPrefabs": [
+      {
+        "__uuid__": "4f18a748-bba6-44f2-9255-9c6367b4220c"
+      }
+    ],
+    "ObstaclePrefabs": [
+      {
+        "__uuid__": "4f18a748-bba6-44f2-9255-9c6367b4220c"
+      }
+    ],
     "PrefabParent": {
       "__id__": 7
     },

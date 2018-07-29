@@ -14,6 +14,8 @@ cc.Class({
   properties: {
     FirstRoad: cc.Node,
     Road1Prefab: cc.Prefab,
+    RoadPrefabs: [cc.Prefab],
+    ObstaclePrefabs: [cc.Prefab],
     PrefabParent: cc.Node,
     _currentPointer: 0,
     _maxPointer: 4,
@@ -41,13 +43,15 @@ cc.Class({
   },
 
   generateNextLevel() {
+    var RandomRoad = this.RoadPrefabs[this.getRandomIntInclusive(0, this.RoadPrefabs.length - 1)]
+    var RandomObstacle = this.ObstaclePrefabs[this.getRandomIntInclusive(0, this.ObstaclePrefabs.length - 1)]
     // If current pointer is more than max, reset to 0
     if (this._currentPointer > this._maxPointer) {
       this._currentPointer = 0
     }
     // If the array has not reached the limit, then push more
     if (this._prefabHolder.length <= this._maxPointer) {
-      this._prefabHolder.push(cc.instantiate(this.Road1Prefab))
+      this._prefabHolder.push(cc.instantiate(RandomRoad))
       this.setCorrectPosition(this._prefabHolder[this._currentPointer])
       this._prefabHolder[this._currentPointer].parent = this.PrefabParent
       this._currentPointer++
@@ -56,7 +60,7 @@ cc.Class({
       if (this._prefabHolder[this._currentPointer] != null) {
         this._prefabHolder[this._currentPointer].destroy()
         this._prefabHolder[this._currentPointer] = cc.instantiate(
-          this.Road1Prefab
+          RandomRoad
         )
         this.setCorrectPosition(this._prefabHolder[this._currentPointer])
         this._prefabHolder[this._currentPointer] = this.PrefabParent
@@ -73,7 +77,12 @@ cc.Class({
       this._prefabHolder[lastIndex].children[0].children.length - 1
     ]
     target.position = lastNode.parent.convertToWorldSpace(lastNode.position)
-  }
+  },
 
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  }
   // update (dt) {},
 })
