@@ -21,7 +21,13 @@ var PlayerWalk = cc.Class({
 
   // LIFE-CYCLE CALLBACKS:
 
-  // onLoad () {},
+  onLoad () {
+    this.node.on('Rewalk', event => {
+      cc.log('HelloWorld Ha')
+      // First Find the parent
+      var nodeParent = this.WayPointHolder.parent
+    })
+  },
 
   start () {
     this._wayPoints = this.WayPointHolder.children
@@ -52,6 +58,8 @@ var PlayerWalk = cc.Class({
     if (this._currentWPIndex < this._wayPoints.length - 1) {
       this._currentWPIndex++
       this.walk()
+    } else {
+      this.node.emit('Rewalk')
     }
   },
 

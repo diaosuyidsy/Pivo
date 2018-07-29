@@ -29,6 +29,12 @@ cc.Class({
     this._prefabHolder.push(this.FirstRoad)
     this._currentPointer++
     this.generateNextLevel()
+    // this.generateNextLevel()
+
+    // this.generateNextLevel()
+
+    // this.generateNextLevel()
+
     // Generate the next x level according to maxpointer
     // this.testent = cc.instantiate(this.Road1Prefab)
     // this.testent.parent = this.PrefabParent
