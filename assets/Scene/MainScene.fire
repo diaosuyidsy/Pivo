@@ -3763,17 +3763,24 @@
     "RoadPrefabs": [
       {
         "__uuid__": "4f18a748-bba6-44f2-9255-9c6367b4220c"
+      },
+      {
+        "__uuid__": "8253fcbb-878c-4840-af79-57293653aedc"
       }
     ],
     "ObstaclePrefabs": [
       {
         "__uuid__": "4f18a748-bba6-44f2-9255-9c6367b4220c"
+      },
+      {
+        "__uuid__": "8253fcbb-878c-4840-af79-57293653aedc"
       }
     ],
     "PrefabParent": {
       "__id__": 7
     },
     "_currentPointer": 0,
+    "_lastRoad": null,
     "_maxPointer": 5,
     "_prefabHolder": []
   },
