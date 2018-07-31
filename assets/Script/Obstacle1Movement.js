@@ -9,33 +9,33 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
-    extends: cc.Component,
+  extends: cc.Component,
 
-    properties: {
-        Point1: cc.Node,
-        Point2: cc.Node,
-    },
+  properties: {
+    Point1: cc.Node,
+    Point2: cc.Node
+  },
 
-    // LIFE-CYCLE CALLBACKS:
+  // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+  // onLoad () {},
 
-    start() {
-        var P1 = this.Point1.parent.convertToWorldSpace(this.Point1.position)
-        var P2 = this.Point2.parent.convertToWorldSpace(this.Point2.position)
-        P1 = this.node.parent.convertToNodeSpace(P1)
-        P2 = this.node.parent.convertToNodeSpace(P2)
+  start () {
+    var P1 = this.Point1.parent.convertToWorldSpace(this.Point1.position)
+    var P2 = this.Point2.parent.convertToWorldSpace(this.Point2.position)
+    P1 = this.node.parent.convertToNodeSpace(P1)
+    P2 = this.node.parent.convertToNodeSpace(P2)
 
-        cc.log(P1.x + " , " + P1.y + " | " + P2.x + " , " + P2.y)
-        var seq = cc.repeatForever(cc.sequence(cc.moveTo(1, P1.x, P1.y), cc.moveTo(1, P2.x, P2.y)))
-        // var seq = cc.repeatForever(cc.sequence(cc.moveTo(1, this.Point1.x, this.Point1.y), cc.moveBy(1, this.Point2.x, this.Point2.y)))
+    var seq = cc.repeatForever(
+      cc.sequence(cc.moveTo(1, P1.x, P1.y), cc.moveTo(1, P2.x, P2.y))
+    )
 
-        this.node.runAction(seq)
-    },
+    this.node.runAction(seq)
+  },
 
-    onCollisionEnter: function (other, self) {
-        cc.log("Collision Enter")
-    }
+  onCollisionEnter: function (other, self) {
+    cc.log('Collision Enter')
+  }
 
-    // update (dt) {},
-});
+  // update (dt) {},
+})
