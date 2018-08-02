@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "79387769-b2c6-4c9a-b9c5-c6f4f651ee4c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Obstacle1_Rework": {
+      "ver": "1.0.3",
+      "uuid": "81929af4-84c4-43e4-80c4-f55d2dcad47d",
+      "rawTextureUuid": "79387769-b2c6-4c9a-b9c5-c6f4f651ee4c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 698,
+      "offsetY": 46.5,
+      "trimX": 1396,
+      "trimY": 846,
+      "width": 1208,
+      "height": 215,
+      "rawWidth": 2604,
+      "rawHeight": 2000,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

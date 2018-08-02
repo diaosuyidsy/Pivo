@@ -60,20 +60,14 @@ cc.Class({
     // If the array has not reached the limit, then push more
     if (this._prefabHolder.length <= this._maxPointer) {
       var pointBefore = this._lastRoad.children[0].children
-      // pointBefore = pointBefore.parent.convertToWorldSpace(pointBefore.position)
-      // var lastpoint1 = pointBefore.convertToWorldSpace()
+
       var SlopEndPosition2 = pointBefore[
         pointBefore.length - 1
       ].parent.convertToWorldSpace(pointBefore[pointBefore.length - 1].position)
       var SlopEndPosition1 = pointBefore[
         pointBefore.length - 2
       ].parent.convertToWorldSpace(pointBefore[pointBefore.length - 2].position)
-      // var slopEndY =
-      //   pointBefore[pointBefore.length - 1].y -
-      //   pointBefore[pointBefore.length - 2].y
-      // var slopEndX =
-      //   pointBefore[pointBefore.length - 1].x -
-      //   pointBefore[pointBefore.length - 2].x
+
       var slopEndY = SlopEndPosition2.y - SlopEndPosition1.y
       var slopEndX = SlopEndPosition2.x - SlopEndPosition1.x
 
@@ -94,10 +88,6 @@ cc.Class({
       var angleStart = Math.atan2(slopeStartX, slopeStartY)
 
       raoad.rotation = cc.radiansToDegrees(angleBefore - angleStart)
-      // cc.log('bedore-start')
-
-      // cc.log(angleBefore)
-      // cc.log(angleStart)
 
       this._prefabHolder.push(raoad)
       this._lastRoad = raoad
