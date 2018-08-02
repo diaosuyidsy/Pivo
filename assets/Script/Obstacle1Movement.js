@@ -37,9 +37,7 @@ cc.Class({
     this.node.runAction(seq)
   },
 
-  onCollisionEnter: function (other, self) {
-    cc.log('Collision Enter')
-  },
+  onCollisionEnter: function (other, self) {},
 
   checkDistance (nodeA, nodeB) {
     var dx = nodeA.x - nodeB.x

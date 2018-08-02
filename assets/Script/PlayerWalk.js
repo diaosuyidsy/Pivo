@@ -7,6 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var LevelCreator = require('LevelCreator')
 
 var PlayerWalk = cc.Class({
   extends: cc.Component,
@@ -17,37 +18,43 @@ var PlayerWalk = cc.Class({
     _wayPoints: [cc.Node],
     _currentWPIndex: 0,
     _targetWayPoint: cc.Node,
-    WalkSpeed: 1.0
+    WalkSpeed: 1.0,
+    _LevelCreateIndex: 0 // Increase if rewalked, generate new level && destroy old when reached 2
   },
 
   // LIFE-CYCLE CALLBACKS:
 
-  onLoad() {
+  onLoad () {
     this.node.on('Rewalk', event => {
-      cc.log('HelloWorld Ha')
       // Find the next children and fill WayPointHolder with it
       // Next get its position in the parent
       var index = 0
       for (; index < this.LevelHolder.children.length; index++) {
         if (this.LevelHolder.children[index] == this.WayPointHolder.parent) {
-          break;
+          break
         }
       }
-      // If we break, then we have found the target index, which is 
+      // If we break, then we have found the target index, which is
       this.WayPointHolder = this.LevelHolder.children[index + 1].children[0]
       this._wayPoints = this.WayPointHolder.children
       this._currentWPIndex = 0
+      // Then decide if we want to generate a new level & destroy the old
+      this._LevelCreateIndex++
+
+      if (this._LevelCreateIndex >= 2) {
+        LevelCreator._instance.generateNextLevel()
+      }
       this.walk()
     })
   },
 
-  start() {
+  start () {
     this._wayPoints = this.WayPointHolder.children
     cc.log(this._wayPoints.length)
     this.walk()
   },
 
-  walk() {
+  walk () {
     // To maintain a certain speed, need to calculate the distance to the next node for t = s/v
     var distanceToNext = this.checkDistance(
       this._wayPoints[this._currentWPIndex].parent.convertToWorldSpace(
@@ -66,7 +73,7 @@ var PlayerWalk = cc.Class({
   },
 
   // After walk to the point, callback is executed to walk to the next point
-  walkCallBack() {
+  walkCallBack () {
     if (this._currentWPIndex < this._wayPoints.length - 1) {
       this._currentWPIndex++
       this.walk()
@@ -76,7 +83,7 @@ var PlayerWalk = cc.Class({
   },
 
   // Return the distance in float from this node to targetNode
-  checkDistance(targetNode) {
+  checkDistance (targetNode) {
     var dx = targetNode.x - this.node.x
     var dy = targetNode.y - this.node.y
     var distance = Math.sqrt(dx * dx + dy * dy)

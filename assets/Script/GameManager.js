@@ -30,15 +30,15 @@ var GameManager = cc.Class({
   },
   statics: {
     _instance: null
-  },
+  }
 
   // LIFE-CYCLE CALLBACKS:
 
-  onLoad () {
-    cc.warn(' =================== GameManger Init ===================')
-    GameManager._instance = this
-    cc.game.addPersistRootNode(this.node)
-  }
+  // onLoad () {
+  //   cc.warn(' =================== GameManger Init ===================')
+  //   GameManager._instance = this
+  //   cc.game.addPersistRootNode(this.node)
+  // }
 
   // update (dt) {},
 })
