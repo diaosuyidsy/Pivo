@@ -17,6 +17,8 @@ cc.Class({
       type: cc.Node
     },
 
+    Canvas: cc.Node,
+
     _t: 0.0,
     RotateSpeed: 0.05,
 
@@ -68,16 +70,39 @@ cc.Class({
     }
   },
 
+  onTouchStart (event) {
+    var touches = event.getTouches()
+    var touchLoc = touches[0].getLocation()
+    var canvasWidth = this.Canvas.getComponent(cc.Canvas).designResolution.width
+
+    if (touchLoc.x <= canvasWidth / 2) {
+      this._startRotateLeft = true
+    } else {
+      this._startRotateRight = true
+    }
+    // cc.log(touchLoc.x + ' , ' + touchLoc.y)
+    // cc.log(this.Canvas.getComponent(cc.Canvas).designResolution.width)
+  },
+
+  onTouchEnd (event) {
+    this._startRotateLeft = false
+    this._startRotateRight = false
+  },
+
   // Trivia
   onLoad: function () {
     // add key down and key up event
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this)
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this)
+    this.Canvas.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this)
+    this.Canvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this)
   },
 
   destroy () {
     this._super()
     cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this)
     cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this)
+    this.Canvas.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this)
+    this.Canvas.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this)
   }
 })

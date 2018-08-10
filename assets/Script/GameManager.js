@@ -27,18 +27,23 @@ var GameManager = cc.Class({
     //         this._bar = value;
     //     }
     // },
+    CameraContainer: cc.Node,
+    MyCamera: cc.Node
   },
   statics: {
     _instance: null
-  }
+  },
 
   // LIFE-CYCLE CALLBACKS:
 
-  // onLoad () {
-  //   cc.warn(' =================== GameManger Init ===================')
-  //   GameManager._instance = this
-  //   cc.game.addPersistRootNode(this.node)
-  // }
+  onLoad () {
+    cc.warn(' =================== GameManger Init ===================')
+    GameManager._instance = this
+    cc.game.addPersistRootNode(this.node)
+  },
 
   // update (dt) {},
+  onPlayerDead () {
+    this.CameraContainer.getComponent('CameraControl').target = null
+  }
 })

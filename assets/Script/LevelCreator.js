@@ -36,6 +36,8 @@ var LevelCreator = cc.Class({
   },
 
   start () {
+    // First need to random first road's rotation
+    this.randomFirstRoad()
     // Push the first road onto the holder
     this._prefabHolder.push(this.FirstRoad)
     this._lastRoad = this.FirstRoad
@@ -43,10 +45,15 @@ var LevelCreator = cc.Class({
 
     this.generateNextLevel()
     this.generateNextLevel()
+    this.generateNextLevel()
 
     // Generate the next x level according to maxpointer
     // this.testent = cc.instantiate(this.Road1Prefab)
     // this.testent.parent = this.Prefathis.FirstRoadbParent
+  },
+
+  randomFirstRoad () {
+    this.FirstRoad.rotation = this.getRandomIntInclusive(0, 360)
   },
 
   generateNextLevel () {
